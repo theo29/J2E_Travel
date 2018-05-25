@@ -1,17 +1,12 @@
 package ch.hevs.travelservice;
 
-import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateful;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
-
 import ch.hevs.businessobject.Address;
 import ch.hevs.businessobject.Booking;
-import ch.hevs.businessobject.Client;
 import ch.hevs.businessobject.Destination;
 import ch.hevs.businessobject.DestinationArrival;
 import ch.hevs.businessobject.DestinationDeparture;
@@ -29,7 +24,7 @@ public class TravelBean implements Travel {
 	// --------------------- METHODS ----------------------
 	@Override
 	public List<Passenger> getPassengers() {
-		return em.createQuery("FROM Flight").getResultList();
+		return em.createQuery("FROM Passenger").getResultList();
 	}
 
 	@Override
@@ -77,24 +72,31 @@ public class TravelBean implements Travel {
 	// to be checked
 	@Override
 	public List<Flight> getFlightsByPassenger(long idPassenger) {
-		return em.createQuery("FROM Flight f INNER JOIN booking b ON f.idFlight=b.idFlight WHERE b.idPassenger=id")
+		return em.createQuery("SELECT f FROM Booking b, IN(b.flight) f, IN(b.passenger) p WHERE p.id:id")
 				.setParameter("id", idPassenger).getResultList();
 
 	}
 
 	// to add
 	@Override
-	public void bookFlight(long passengerId, long flightId) throws Exception {
+	public void bookFlight(Passenger p, Flight f) throws Exception {
+		System.out.println("ID Passenger: " + p.getId());
+		System.out.println("ID Flight: " + f.getId());
+
+		// for use with EPC and Stateful
+		em.persist(p);
+		em.persist(f);
 
 	}
 
-	// to add
+	// delete a flight by passenger
 	@Override
-	public void deleteFlightByUser(long idPassenger, long idFlight) {
-		// TODO Auto-generated method stub
-
+	public void deleteFlightByPassenger(Flight f) {
+		em.remove(f);
 	}
 
+	
+	//to fill in the data into DB
 	@Override
 	public void populateDatabase() {
 
@@ -136,35 +138,33 @@ public class TravelBean implements Travel {
 
 		// --------------------- Flights ---------------------
 		/*
-		 * public Flight(String airCompany, String flightDate, String flightNumber, double
-		 * departureTime, double arrivalTime, double duration,
-		 * DestinationDeparture fkDestinationDeparture, DestinationArrival
-		 * fkDestinationArrival)
+		 * public Flight(String airCompany, String flightDate, String
+		 * flightNumber, double departureTime, double arrivalTime, double
+		 * duration, DestinationDeparture fkDestinationDeparture,
+		 * DestinationArrival fkDestinationArrival)
 		 */
 
 		Flight f1 = new Flight("UIA", "28-06-2018", "PS1507", 10.30, 12.30, 3.00, ddKiev, daZurich);
-		Flight f2 = new Flight("Swiss Air",  "17-07-2018", "SA907", 14.30, 15.30, 2.00, ddSion, daLondon);
-		
-		
+		Flight f2 = new Flight("Swiss Air", "17-07-2018", "SA907", 14.30, 15.30, 2.00, ddSion, daLondon);
+
 		// --------------------- Booking ---------------------
-		
+
 		// public Booking(String date, Passenger fkPassenger, Flight fkFlight)
 
-		Booking b1 = new Booking("25-05-2018", passengerLinda, f2);
-		Booking b2 = new Booking("10-05-2018", passengerTom, f1);
-		
-		
-		//--------------------- Persist objects ---------------------
+		Booking b1 = new Booking(passengerLinda, f2);
+		Booking b2 = new Booking(passengerTom, f1);
+
+		// --------------------- Persist objects ---------------------
 		em.persist(airportKiev);
 		em.persist(airportLondon);
 		em.persist(airportSion);
 		em.persist(airportZurich);
 		em.persist(passengerLinda);
 		em.persist(passengerTom);
-		
+
 		em.persist(ddKiev);
 		em.persist(ddSion);
-		
+
 		em.persist(daLondon);
 		em.persist(daZurich);
 	}

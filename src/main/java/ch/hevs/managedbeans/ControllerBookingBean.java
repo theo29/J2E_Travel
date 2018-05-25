@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateful;
-import javax.faces.event.ValueChangeEvent;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -15,29 +14,27 @@ import ch.hevs.businessobject.Flight;
 import ch.hevs.travelservice.Travel;
 import ch.hevs.businessobject.DestinationArrival;
 import ch.hevs.businessobject.DestinationDeparture;
-import ch.hevs.businessobject.Address;
 
 // To addapt to our program
-public class ControllerBookingBean
-{
-	//General
+public class ControllerBookingBean {
+	// General
 	private Travel travel;
 
-	//homepage.xhtml
+	// homepage.xhtml
 	private List<String> bigImages;
 
-	//Destinations.xhtml
+	// Destinations.xhtml
 	private List<Destination> destinations;
 	private Destination selectedDestination;
 
-	//bookingForm.xhtml
+	// bookingForm.xhtml
 	private List<Flight> flightList;
 	private Flight selectedFlight;
 
-	//profile.xhtml
+	// profile.xhtml
 	private Passenger currentPassenger;
 
-	//administration.xhtml
+	// administration.xhtml
 	private List<DestinationArrival> arrivalList;
 	private List<DestinationDeparture> departureList;
 	private List<Passenger> PassengerList;
@@ -73,41 +70,20 @@ public class ControllerBookingBean
 		setPassengerList(new ArrayList<Passenger>());
 		setPassengerList(travel.getPassengers());
 
-		// Get Passenger N°3 to simulate a logged in Passenger in the profile page
+		// Get Passenger N°3 to simulate a logged in Passenger in the profile
+		// page
 		setCurrentPassenger(PassengerList.get(2));
 
 		// Get numbers for the admin panel stat
 		setNbTravelers(travel.getTotalPassengers());
-		setNbFlight(travel.getAmountFlights()) ;
+		setNbFlight(travel.getAmountFlights());
 
-		populateBigImageList();
+		populateDatabase();
+
 	}
 
-	public void populateDatabase(){
+	public void populateDatabase() {
 		travel.populateDatabase();
-	}
-
-	public void populateBigImageList(){
-		bigImages = new ArrayList<String>();
-		bigImages.add("Amsterdam.jpg");
-		bigImages.add("Barcelone.jpg");
-		bigImages.add("Bruges.jpg");
-		bigImages.add("Budapest.jpg");
-		bigImages.add("Copenhagen.jpg");
-		bigImages.add("Edinburgh.jpg");
-		bigImages.add("Florence.jpg");
-		bigImages.add("Istanbul.jpg");
-		bigImages.add("Londre.jpg");
-		bigImages.add("Lucerne.jpg");
-		bigImages.add("Madrid.jpg");
-		bigImages.add("Nuremberg.jpg");
-		bigImages.add("Paris.jpg");
-		bigImages.add("Rome.jpg");
-		bigImages.add("Salzburg.jpg");
-		bigImages.add("Stockholm.jpg");
-		bigImages.add("Venise.jpg");
-		bigImages.add("Vienne.jpg");
-		bigImages.add("Zurich.jpg");
 	}
 
 	public List<Flight> getFlightList() {

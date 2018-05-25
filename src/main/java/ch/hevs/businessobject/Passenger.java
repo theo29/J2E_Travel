@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.mapping.Array;
-
+//Passenger
 @Entity
 @Table(name = "Passenger")
 public class Passenger {

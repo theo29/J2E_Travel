@@ -1,7 +1,5 @@
 package ch.hevs.businessobject;
 
-import java.util.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +15,6 @@ public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
-	private String bookingDate;
 
 	// relations
 	@ManyToOne(cascade = CascadeType.REMOVE)
@@ -35,15 +32,6 @@ public class Booking {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-
-	public String getBookingDate() {
-		return bookingDate;
-	}
-
-	public void setBookingDate(String bookingDate) {
-		this.bookingDate = bookingDate;
 	}
 
 	public Passenger getFkPassenger() {
@@ -66,8 +54,7 @@ public class Booking {
 	public Booking() {
 	}
 
-	public Booking(String date, Passenger fkPassenger, Flight fkFlight) {
-		this.bookingDate = date;
+	public Booking(Passenger fkPassenger, Flight fkFlight) {
 		this.fkFlight = fkFlight;
 		this.fkPassenger = fkPassenger;
 

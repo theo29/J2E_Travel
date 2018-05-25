@@ -8,14 +8,15 @@
 	<persistence-unit name="TravelPU">
 		<jta-data-source>java:/labsDS</jta-data-source>
 		
-		<class>ch.hevs.businessobject.Account</class>
+	
 		<class>ch.hevs.businessobject.Address</class>
-		<class>ch.hevs.businessobject.Client</class>
 		<class>ch.hevs.businessobject.Destination</class>
 		<class>ch.hevs.businessobject.DestinationArrival</class>
 		<class>ch.hevs.businessobject.DestinationDeparture</class>
 		<class>ch.hevs.businessobject.Flight</class>
 		<class>ch.hevs.businessobject.Passenger</class>
+		<class>ch.hevs.businessobject.Account</class>
+		<class>ch.hevs.businessobject.Client</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" /> 

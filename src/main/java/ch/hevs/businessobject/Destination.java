@@ -16,7 +16,6 @@ import javax.persistence.Embedded;
 //Each class is mapped to a separate table
 //DestinationDeparture/DestinationArrival
 
-
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Destination {
@@ -25,7 +24,6 @@ public class Destination {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	private String airportName;
-
 
 	// Address
 	@Embedded
@@ -48,7 +46,7 @@ public class Destination {
 		this.airportName = airportName;
 
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -68,7 +66,5 @@ public class Destination {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-
-
 
 }

@@ -1,18 +1,14 @@
 package ch.hevs.businessobject;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -30,10 +26,10 @@ public class Flight {
 
 	@Column(name = "flightNumber")
 	private String flightNumber;
-	
+
 	@Column(name = "flightDate")
 	private String flightDate;
-	
+
 	@Column(name = "departureTime")
 	private double departureTime;
 
@@ -44,21 +40,19 @@ public class Flight {
 	private double duration;
 
 	// relations
-	
-	// relations
-		@OneToMany(mappedBy = "fkFlight", cascade = CascadeType.ALL)//@JoinColumn(name = "FK_PASSENGER")
-		private List<Booking> bookings;
-	/* cascade = CascadeType.REMOVE
-	 * When flight is deleted, its destination departure/arrival
-	 * must also be deleted
+	@OneToMany(mappedBy = "fkFlight", cascade = CascadeType.ALL)
+	private List<Booking> bookings;
+
+	/*
+	 * cascade = CascadeType.REMOVE When flight is deleted, its destination
+	 * departure/arrival must also be deleted
 	 */
-	
+
 	@ManyToOne(cascade = CascadeType.REMOVE)
 	private DestinationDeparture fkDestinationDeparture;
 
 	@ManyToOne(cascade = CascadeType.REMOVE)
 	private DestinationArrival fkDestinationArrival;
-
 
 	public long getId() {
 		return id;
@@ -83,8 +77,6 @@ public class Flight {
 	public void setFlightNumber(String flightNumber) {
 		this.flightNumber = flightNumber;
 	}
-
-
 
 	public String getFlightDate() {
 		return flightDate;
@@ -133,15 +125,11 @@ public class Flight {
 	public void setFkDestinationArrival(DestinationArrival fkDestinationArrival) {
 		this.fkDestinationArrival = fkDestinationArrival;
 	}
-	
-	
-	
-	// constructors
-	public Flight() {
-	}
 
-	public Flight(String airCompany, String flightNumber, String flightDate, double departureTime, double arrivalTime, double duration,
-			DestinationDeparture fkDestinationDeparture, DestinationArrival fkDestinationArrival) {
+	// constructors
+
+	public Flight(String airCompany, String flightNumber, String flightDate, double departureTime, double arrivalTime,
+			double duration, DestinationDeparture fkDestinationDeparture, DestinationArrival fkDestinationArrival) {
 		this.flightNumber = flightNumber;
 		this.flightDate = flightDate;
 		this.duration = duration;
@@ -151,13 +139,13 @@ public class Flight {
 		this.fkDestinationDeparture = fkDestinationDeparture;
 		this.fkDestinationArrival = fkDestinationArrival;
 		bookings = new ArrayList<Booking>();
-	
+
 	}
 
-	//relation booking - flight
-		public void addBooking(Booking b) {
-			this.bookings.add(b);
-			b.setFkFlight(this);
-		}
-	
+	// relation booking - flight
+	public void addBooking(Booking b) {
+		this.bookings.add(b);
+		b.setFkFlight(this);
+	}
+
 }
