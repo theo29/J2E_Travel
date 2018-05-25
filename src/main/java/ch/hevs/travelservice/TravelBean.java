@@ -51,13 +51,13 @@ public class TravelBean implements Travel {
 
 	@Override
 	public int getTotalPassengers() {
-		int nb = ((Number) em.createQuery("Select Count(p) from 	Passenger p").getSingleResult()).intValue();
+		int nb = ((Number) em.createQuery("Select Count(p) from Passenger p").getSingleResult()).intValue();
 		return nb;
 	}
 
 	@Override
 	public int getAmountFlights() {
-		int nb = ((Number) em.createQuery("Select Count(f) from 	Flight f").getSingleResult()).intValue();
+		int nb = ((Number) em.createQuery("Select Count(f) from Flight f").getSingleResult()).intValue();
 		return nb;
 	}
 
@@ -152,6 +152,21 @@ public class TravelBean implements Travel {
 
 		Booking b1 = new Booking("25-05-2018", passengerLinda, f2);
 		Booking b2 = new Booking("10-05-2018", passengerTom, f1);
+		
+		
+		//--------------------- Persist objects ---------------------
+		em.persist(airportKiev);
+		em.persist(airportLondon);
+		em.persist(airportSion);
+		em.persist(airportZurich);
+		em.persist(passengerLinda);
+		em.persist(passengerTom);
+		
+		em.persist(ddKiev);
+		em.persist(ddSion);
+		
+		em.persist(daLondon);
+		em.persist(daZurich);
 	}
 
 }

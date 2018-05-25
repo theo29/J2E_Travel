@@ -50,7 +50,7 @@ public interface Travel {
 
 	void populateDatabase();
 	
-	//to fill in the data
+	
 	
 	
 	

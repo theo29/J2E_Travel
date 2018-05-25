@@ -1,5 +1,6 @@
 package ch.hevs.businessobject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.mapping.Array;
 
 @Entity
 @Table(name = "Passenger")
@@ -24,7 +27,7 @@ public class Passenger {
 	private String firstname;
 
 	// relations
-	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)//@JoinColumn(name = "FK_PASSENGER")
+	@OneToMany(mappedBy = "fkPassenger", cascade = CascadeType.ALL)//@JoinColumn(name = "FK_PASSENGER")
 	private List<Booking> bookings;
 
 	// constructors
@@ -34,8 +37,12 @@ public class Passenger {
 	public Passenger(String firstname, String lastname) {
 		this.lastname = lastname;
 		this.firstname = firstname;
+		//instatiation - to be able to make add booking
+		bookings = new ArrayList<Booking>();
+		
 	}
 
+	
 	// Getters&Setters
 	public long getId() {
 		return id;
@@ -66,5 +73,10 @@ public class Passenger {
 		this.firstname = firstname;
 	}
 
+	//relation booking - passenger
+	public void addBooking(Booking b) {
+		this.bookings.add(b);
+		b.setFkPassenger(this);
+	}
 
 }

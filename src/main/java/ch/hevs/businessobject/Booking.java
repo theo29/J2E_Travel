@@ -21,9 +21,11 @@ public class Booking {
 
 	// relations
 	@ManyToOne(cascade = CascadeType.REMOVE)
+	@JoinColumn(nullable = false)
 	private Passenger fkPassenger;
 
 	@ManyToOne(cascade = CascadeType.REMOVE)
+	@JoinColumn(nullable = false)
 	private Flight fkFlight;
 	
 	
@@ -34,7 +36,6 @@ public class Booking {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 
 	public String getBookingDate() {
@@ -69,5 +70,6 @@ public class Booking {
 		this.bookingDate = date;
 		this.fkFlight = fkFlight;
 		this.fkPassenger = fkPassenger;
+
 	}
 }
