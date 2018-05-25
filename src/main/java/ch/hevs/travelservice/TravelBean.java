@@ -19,14 +19,14 @@ import ch.hevs.businessobject.Flight;
 import ch.hevs.businessobject.Passenger;
 
 // we implement here methods from interface Travel
-// getFlightsByPassenger to be checked !!!
+// getFlightsByPassenger to be checked !!!!
 @Stateful
 public class TravelBean implements Travel {
 
 	@PersistenceContext(name = "TravelPU", type = PersistenceContextType.EXTENDED)
 	private EntityManager em;
 
-	// --------------------- METHODS ---------------------
+	// --------------------- METHODS ----------------------
 	@Override
 	public List<Passenger> getPassengers() {
 		return em.createQuery("FROM Flight").getResultList();
