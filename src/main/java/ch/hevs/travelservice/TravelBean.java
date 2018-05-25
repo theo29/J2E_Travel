@@ -14,7 +14,7 @@ import ch.hevs.businessobject.Flight;
 import ch.hevs.businessobject.Passenger;
 
 // we implement here methods from interface Travel
-// getFlightsByPassenger to be checked !!!!
+
 @Stateful
 public class TravelBean implements Travel {
 
