@@ -48,7 +48,7 @@ public class ControllerBookingBean {
 
 		// use JNDI to inject reference to bank EJB
 		InitialContext ctx = new InitialContext();
-		travel = (Travel) ctx.lookup("java:global/Travel-0.0.1-SNAPSHOT/TravelBean!ch.hevs.travelServices.Travel");
+		travel = (Travel) ctx.lookup("java:app/TravelTD-0.0.1-SNAPSHOT/TravelBean");
 
 		// Create and populate a list of flight objects
 		setFlightList(new ArrayList<Flight>());
