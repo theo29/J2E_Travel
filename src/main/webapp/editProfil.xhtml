@@ -15,6 +15,10 @@
 		<h:outputText value="#{ControllerBookingBean.currentPassenger.lastname}" />
 		<h:outputText value="Firstname:"/>
 		<h:outputText value="#{ControllerBookingBean.currentPassenger.firstname}"/>
+					<div style="width: 100px; margin: auto;">
+				<h:commandButton value="Populate"
+					action="#{TravelBean.populateDatabase}" class="btn btn-danger"></h:commandButton>
+			</div>
 		
 	</ui:define>
 </ui:composition>

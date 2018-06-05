@@ -72,13 +72,13 @@ public class ControllerBookingBean {
 
 		// Get Passenger N°3 to simulate a logged in Passenger in the profile
 		// page
-		setCurrentPassenger(PassengerList.get(2));
+		setCurrentPassenger(PassengerList.get(0));
 
 		// Get numbers for the admin panel stat
 		setNbTravelers(travel.getTotalPassengers());
 		setNbFlight(travel.getAmountFlights());
 
-		populateDatabase();
+		//populateDatabase();
 
 	}
 

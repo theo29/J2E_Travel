@@ -122,8 +122,8 @@ public class TravelBean implements Travel {
 		ddKiev.setAddress(airportKiev);
 
 		DestinationDeparture ddSion = new DestinationDeparture();
-		ddKiev.setAirportName("Sion Airport");
-		ddKiev.setAddress(airportSion);
+		ddSion.setAirportName("Sion Airport");
+		ddSion.setAddress(airportSion);
 
 		// --------------------- Arrival destinations - Airport
 		// ---------------------
